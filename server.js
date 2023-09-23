@@ -1,15 +1,17 @@
 const express = require('express');
+const path = require('path');
 const app = new express();
 
 const port = 8080;
 
 app.use(express.static('public'))
+app.set("view engine", "ejs")
+
+app.set('views', path.join(__dirname, 'views'));
 
 
-app.get('/', (request, response) => {
-    response.json({
-        "Hosting":  "Kinsta"
-    })
+app.get("/", (request, response) => {
+    response.render("index")
 })
 
 app.listen(port, () => {
